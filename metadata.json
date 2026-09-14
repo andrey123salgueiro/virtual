@@ -1,0 +1,6 @@
+{
+  "name": "Achadinhos da WEB",
+  "description": "Vitrine moderna e minimalista de achadinhos e produtos recomendados com redirecionamento seguro para as lojas oficiais.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

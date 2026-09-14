@@ -1,0 +1,135 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Achadinho da vitrine com link de afiliado e dados de exibição",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID único do produto"
+        },
+        "title": {
+          "type": "string",
+          "description": "Título e nome do produto",
+          "maxLength": 300
+        },
+        "shortDescription": {
+          "type": "string",
+          "description": "Breve descrição do produto para o card",
+          "maxLength": 500
+        },
+        "fullDescription": {
+          "type": "string",
+          "description": "Descrição completa e detalhada do produto",
+          "maxLength": 2000
+        },
+        "price": {
+          "type": "number",
+          "description": "Preço atual de oferta"
+        },
+        "originalPrice": {
+          "type": "number",
+          "description": "Preço original de referência para cálculo de desconto"
+        },
+        "affiliateUrl": {
+          "type": "string",
+          "description": "Link de afiliado seguro e direto para a loja oficial"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL da imagem de capa do produto"
+        },
+        "platform": {
+          "type": "string",
+          "description": "Loja parceira de origem (shopee, amazon, mercadolivre, magalu, shein, outro)"
+        },
+        "category": {
+          "type": "string",
+          "description": "Categoria do produto"
+        },
+        "badge": {
+          "type": "string",
+          "description": "Etiqueta promocional (ex: Viral TikTok, Mais Vendido)"
+        },
+        "freeShipping": {
+          "type": "boolean",
+          "description": "Indica se o frete é grátis"
+        },
+        "featured": {
+          "type": "boolean",
+          "description": "Indica se o produto deve ficar em destaque no topo"
+        },
+        "rating": {
+          "type": "number",
+          "description": "Nota média de avaliação dos compradores"
+        },
+        "reviewsCount": {
+          "type": "number",
+          "description": "Quantidade de avaliações registradas"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Data de criação em formato ISO"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "price",
+        "affiliateUrl",
+        "imageUrl",
+        "platform",
+        "category"
+      ]
+    },
+    "StoreSettings": {
+      "title": "StoreSettings",
+      "description": "Configurações gerais da vitrine de achadinhos",
+      "type": "object",
+      "properties": {
+        "storeName": {
+          "type": "string",
+          "description": "Nome da loja",
+          "maxLength": 100
+        },
+        "tagline": {
+          "type": "string",
+          "description": "Slogan da loja",
+          "maxLength": 300
+        },
+        "whatsappGroupUrl": {
+          "type": "string",
+          "description": "Link de convite do grupo VIP de ofertas no WhatsApp"
+        },
+        "instagramUrl": {
+          "type": "string",
+          "description": "Link do perfil da loja no Instagram"
+        },
+        "disclosureText": {
+          "type": "string",
+          "description": "Aviso legal de transparência e links de afiliados",
+          "maxLength": 1000
+        },
+        "adminPassword": {
+          "type": "string",
+          "description": "Senha de acesso ao painel de administração",
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "storeName"
+      ]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Coleção de produtos cadastrados na loja"
+    },
+    "/settings/{settingId}": {
+      "schema": "StoreSettings",
+      "description": "Documentos de configuração geral da vitrine"
+    }
+  }
+}

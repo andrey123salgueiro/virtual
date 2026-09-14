@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function isValidProduct(data) {
+      return data.title is string && data.title.size() > 0 && data.title.size() <= 300 &&
+             data.price is number && data.price > 0 &&
+             data.affiliateUrl is string && data.affiliateUrl.size() > 0 && data.affiliateUrl.size() <= 1000 &&
+             data.imageUrl is string && data.imageUrl.size() > 0 && data.imageUrl.size() <= 1000 &&
+             data.platform is string && data.platform.size() > 0 && data.platform.size() <= 50 &&
+             data.category is string && data.category.size() > 0 && data.category.size() <= 50;
+    }
+
+    function isValidSettings(data) {
+      return data.storeName is string && data.storeName.size() > 0 && data.storeName.size() <= 100;
+    }
+
+    // Public catalog: anyone can read products; writes are validated
+    match /products/{productId} {
+      allow read: if true;
+      allow create, update: if isValidProduct(incoming());
+      allow delete: if true;
+    }
+
+    // Store settings: anyone can read; updates are validated
+    match /settings/{settingId} {
+      allow read: if true;
+      allow create, update: if isValidSettings(incoming());
+      allow delete: if false;
+    }
+  }
+}
